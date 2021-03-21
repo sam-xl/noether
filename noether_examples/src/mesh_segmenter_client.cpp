@@ -31,7 +31,8 @@
 #include <vtkSTLWriter.h>
 #include <ros/package.h>
 
-
+#include <noether_conversions/noether_conversions.h>
+#include <shape_msgs/Mesh.h>
 
 namespace noether
 {
@@ -91,8 +92,12 @@ int main(int argc, char** argv)
   pnh.param<bool>("save_outputs", save_outputs, false);
 
   // Step 2: Import the mesh
+  // pcl::PolygonMesh pcl_mesh;
+  // pcl::io::loadPLYFile(file, pcl_mesh);
+  shape_msgs::Mesh shape_msg_mesh;
+  noether_conversions::loadPLYFile(file, shape_msg_mesh);
   pcl::PolygonMesh pcl_mesh;
-  pcl::io::loadPLYFile(file, pcl_mesh);
+  noether_conversions::convertToPCLMesh(shape_msg_mesh, pcl_mesh);
   ROS_INFO_STREAM("Imported as PCL mesh of size " << pcl_mesh.cloud.data.size() << '\n');
 
   // Step 3: Use action interface
