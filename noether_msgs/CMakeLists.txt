@@ -1,64 +1,34 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.8)
 project(noether_msgs)
 
-find_package(catkin REQUIRED COMPONENTS
-  actionlib
-  actionlib_msgs
-  geometry_msgs
-  message_generation
-  pcl_msgs
-  shape_msgs
-  std_msgs
-)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-################################################
-## Declare ROS messages, services and actions ##
-################################################
+find_package(ament_cmake REQUIRED)
+find_package(action_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(pcl_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(shape_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 
-## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-    FilteringConfig.msg
-    PlaneSlicerRasterGeneratorConfig.msg
-    SurfaceWalkRasterGeneratorConfig.msg
-    EigenValueEdgeGeneratorConfig.msg
-    HalfedgeEdgeGeneratorConfig.msg
-    SegmentationConfig.msg
-    ToolPathConfig.msg
-    ToolPath.msg
-    ToolPaths.msg
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "action/ApplyMeshFilters.action"
+  "action/GenerateToolPaths.action"
+  "action/Segment.action"
+  "msg/EigenValueEdgeGeneratorConfig.msg"
+  "msg/FilteringConfig.msg"
+  "msg/HalfedgeEdgeGeneratorConfig.msg"
+  "msg/PlaneSlicerRasterGeneratorConfig.msg"
+  "msg/SegmentationConfig.msg"
+  "msg/SurfaceWalkRasterGeneratorConfig.msg"
+  "msg/ToolPath.msg"
+  "msg/ToolPathConfig.msg"
+  "msg/ToolPaths.msg"
+  "srv/GenerateConvexHull.srv"
+  DEPENDENCIES action_msgs geometry_msgs pcl_msgs shape_msgs std_msgs
 )
+ament_export_dependencies(rosidl_default_runtime)
 
-## Generate actions in the 'action' folder
-add_action_files(
-  FILES
-    GenerateToolPaths.action
-    ApplyMeshFilters.action
-    Segment.action
-)
-##Generate service files in the 'srv' folder
-add_service_files(
- FILES
-    GenerateConvexHull.srv
-)
-generate_messages(
-  DEPENDENCIES
-    actionlib_msgs
-    geometry_msgs
-    pcl_msgs
-    shape_msgs
-    std_msgs
-)
-
-###################################
-## catkin specific configuration ##
-###################################
-catkin_package(
-  CATKIN_DEPENDS
-    actionlib_msgs
-    geometry_msgs
-    message_runtime
-    pcl_msgs
-    shape_msgs
-    std_msgs
-)
+ament_package()
