@@ -41,6 +41,7 @@ add_action_files(
 add_service_files(
  FILES
     GenerateConvexHull.srv
+    SrvWithBoolArray.srv
 )
 generate_messages(
   DEPENDENCIES
