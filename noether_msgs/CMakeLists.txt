@@ -28,6 +28,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ToolPathConfig.msg"
   "msg/ToolPaths.msg"
   "srv/GenerateConvexHull.srv"
+  "srv/SrvWithBoolArray.srv"
   DEPENDENCIES action_msgs geometry_msgs pcl_msgs shape_msgs std_msgs
 )
 ament_export_dependencies(rosidl_default_runtime)
