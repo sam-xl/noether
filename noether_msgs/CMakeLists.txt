@@ -19,6 +19,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "action/Segment.action"
   "msg/EigenValueEdgeGeneratorConfig.msg"
   "msg/FilteringConfig.msg"
+  "msg/MsgWithBoolArray.msg"
   "msg/HalfedgeEdgeGeneratorConfig.msg"
   "msg/PlaneSlicerRasterGeneratorConfig.msg"
   "msg/SegmentationConfig.msg"
