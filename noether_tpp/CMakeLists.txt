@@ -172,6 +172,16 @@ target_cxx_version(
 )
 target_clang_tidy(mesh_primitive_generator ENABLE ${NOETHER_ENABLE_CLANG_TIDY})
 
+# Mesh modifier runner application
+add_executable(mesh_modifier_runner src/app/mesh_modifier_runner.cpp)
+target_link_libraries(mesh_modifier_runner PRIVATE ${PROJECT_NAME} Boost::program_options)
+target_cxx_version(
+  mesh_modifier_runner
+  PUBLIC
+  VERSION 14
+)
+target_clang_tidy(mesh_modifier_runner ENABLE ${NOETHER_ENABLE_CLANG_TIDY})
+
 # Install headers
 install(DIRECTORY include/ DESTINATION include/)
 
@@ -190,8 +200,8 @@ configure_package(
     "PCL REQUIRED COMPONENTS common io surface segmentation"
     "VTK 9 REQUIRED COMPONENTS CommonCore CommonDataModel CommonTransforms CommonColor CommonMath CommonComputationalGeometry IOGeometry IOPLY FiltersCore FiltersGeneral RenderingCore RenderingAnnotation RenderingOpenGL2"
     boost_plugin_loader
-  TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_plugins mesh_primitive_generator
+  TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_plugins mesh_primitive_generator mesh_modifier_runner
 )
 
 # Install the executables for access by ROS
-install(TARGETS mesh_primitive_generator DESTINATION lib/${PROJECT_NAME})
+install(TARGETS mesh_primitive_generator mesh_modifier_runner DESTINATION lib/${PROJECT_NAME})
