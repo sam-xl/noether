@@ -151,7 +151,8 @@ int main(int argc, char** argv)
     makeDirectory(out_dir);
 
     // Stage 0: the input mesh
-    std::vector<pcl::PolygonMesh> meshes{ input_mesh };
+    std::vector<pcl::PolygonMesh> meshes;
+    meshes.push_back(std::move(input_mesh));
     printStage(0, "input", 0.0, meshes);
     saveStage(out_dir, 0, "input", meshes);
 
