@@ -200,7 +200,10 @@ configure_package(
     "PCL REQUIRED COMPONENTS common io surface segmentation"
     "VTK 9 REQUIRED COMPONENTS CommonCore CommonDataModel CommonTransforms CommonColor CommonMath CommonComputationalGeometry IOGeometry IOPLY FiltersCore FiltersGeneral RenderingCore RenderingAnnotation RenderingOpenGL2"
     boost_plugin_loader
-  TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_plugins mesh_primitive_generator mesh_modifier_runner
+  TARGETS ${PROJECT_NAME}
+          ${PROJECT_NAME}_plugins
+          mesh_primitive_generator
+          mesh_modifier_runner
 )
 
 # Install the executables for access by ROS
